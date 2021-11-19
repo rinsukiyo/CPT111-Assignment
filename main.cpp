@@ -12,12 +12,14 @@ using namespace std;
 int main() {
     // Initialization
     double length, width, temp,
-    length1, width1, length2, width2;
+    length1 = 0.0, width1 = 0.0, length2 = 0.0, width2 = 0.0,
+    seat1 = 0.0, seat2 = 0.0;
     
     int solution1, solution2 = 0;
     
     // Ask for input
-    cout << "Please enter the length and the width of the dining hall/room." << endl;
+    cout << "Welcome! Looking for a new table fits your dining hall? We are here to help!" << endl;
+    cout << "Please enter the length and the width of the dining hall or room." << endl;
     cin >> length >> width;
     
     // Interchange if the width is larger than the length
@@ -75,13 +77,12 @@ int main() {
             solution1 = 8;
             
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else if (length >= 2.1) {
-        if (width >= 1.5) {
-            
-        } else if (width >= 1.0) {
+        if (width >= 1.0) {
             length1 = 2.1;
             width1 = 1.0;
             
@@ -99,15 +100,15 @@ int main() {
             
             solution1 = 2;
             solution2 = 6;
-        } else if (width >= 0.8) {
-            
-            
         } else if (width >= 0.76) {
             length1 =  0.76;
             width1 = 0.76;
             
+            solution1 = 8;
+            
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else if (length >= 1.5) {
@@ -144,7 +145,8 @@ int main() {
             solution1 = 1;
             
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else if (length >= 1.35) {
@@ -172,7 +174,8 @@ int main() {
             solution1 = 8;
             
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else if (length >= 0.9) {
@@ -191,7 +194,8 @@ int main() {
             solution1 = 8;
             
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else if (length >= 0.76) {
@@ -201,12 +205,117 @@ int main() {
             solution1 = 8;
             
         } else {
-            cout << "Sorry, the " << endl;
+            solution1 = solution2 = 0;
+            cout << "Sorry, we can't find a table that meets your requirements." << endl;
         }
         
     } else {
-        cout << "Sorry, the" << endl;
+        solution1 = solution2 = 0;
+        cout << "Sorry, we can't find a table that meets your requirements." << endl;
     }
+    // Judgement END
+    
+    // Calculate the seats of the best choices
+    // Define the number of the seats of Solution 1
+    switch (solution1) {
+        case 1:
+            seat1 = 6;
+            break;
+            
+        case 2:
+            seat1 = 6;
+            break;
+            
+        case 3:
+            seat1 = 8;
+            break;
+            
+        case 4:
+            seat1 = 12;
+            break;
+            
+        case 5:
+            seat1 = 8;
+            break;
+            
+        case 6:
+            seat1 = 6;
+            break;
+            
+        case 7:
+            seat1 = 4;
+            break;
+            
+        case 8:
+            seat1 = 2;
+            break;
+            
+        case 9:
+            seat1 = 10;
+            break;
+            
+        default:
+            break;
+    }
+    // Define the number of the seats of Solution 1 END
+    
+    // Define the number of the seats of Solution 2
+    switch (solution2) {
+        case 1:
+            seat2 = 6;
+            break;
+            
+        case 2:
+            seat2 = 6;
+            break;
+            
+        case 3:
+            seat2 = 8;
+            break;
+            
+        case 4:
+            seat2 = 12;
+            break;
+            
+        case 5:
+            seat2 = 8;
+            break;
+            
+        case 6:
+            seat2 = 6;
+            break;
+            
+        case 7:
+            seat2 = 4;
+            break;
+            
+        case 8:
+            seat2 = 2;
+            break;
+            
+        case 9:
+            seat2 = 10;
+            break;
+            
+        default:
+            break;
+    }
+    
+    // Show the results
+    // If two solutions exist
+    if (solution1 != 0 && solution2 != 0) {
+        cout << "Thanks for waiting. We have found 2 solutions for you. The number " << solution1 << " and the number " << solution2 << " are available." << endl;
+        
+        cout << "The number " << solution1 << " has " << seat1 << " seats, and the number " << solution2 << " has " << seat2 << " seats. (" << length1 << " x " << width1 << "m or " << length2 << " x " << width2 << "m)" << endl;
+    
+    // If only one solution exists
+    } else if (solution1 != 0 & solution2 == 0) {
+        cout << "Thanks for waiting. We have found 1 solution for you. The number " << solution1 << " is available." << endl;
+        
+        cout << "The number " << solution1 << " has " << seat1 << " seats. (" << length1 << " x" << width1 << "m)" << endl;
+    }
+    
+    cout << "Have a nice day!" << endl;
     
     return 0;
     
