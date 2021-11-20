@@ -18,8 +18,10 @@ int main() {
     int solution1, solution2 = 0;
     
     // Ask for input
-    cout << "Welcome! Looking for a new table fits your dining hall? We are here to help!" << endl;
-    cout << "Please enter the length and the width of the dining hall or room." << endl;
+    cout << "Welcome! Looking for a new table fits your dining hall? We are here to help!\n" << endl;
+    cout << "We have 9 kinds of tables for you to choose, which are:" << endl;
+    cout <<"1. Rectangle Heinrich table (1.3 x 0.8m with 6 seaters)\n" << "2. Rectangle Niklas table (1.5 x 0.9m with 6 seaters)\n" << "3. Rectangle Bertha table(2.1 x 1.0m with 8 seaters)\n" << "4. Rectangle Shade table(3 x 1m with 12 seaters)\n" << "5. Round Nadine table(1.5m diameter with 8 seaters)\n" <<"6. Round Emma table (1.35m diameter with 6 seaters)\n" << "7. Square Lea table (0.9 x 0.9m with 4 seaters)\n" << "8. Square Finn table(0.76 x 0.76m with 2 seaters)\n" << "9. Oval Stefan table(3 x 1.3m with 10 seaters)\n" << endl;
+    cout << "Please enter the length and the width of the dining hall or room. (in meter)" << endl;
     cin >> length >> width;
     
     // Interchange if the width is larger than the length
