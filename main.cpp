@@ -13,9 +13,10 @@ using namespace std;
 int main ()
 {
     // Initialization
-    int ceilingNum = 0, choiceNum, num,
-    choice1 = 0, choice2 = 0,
-    row = 1, column = 1, i = 1;
+    int ceilingNum = 0, choiceNum = 1,
+    choice1 = 4, choice2 = 0,
+    row = 1, column = 1, i = 1,
+    modelLength = 0;
     
     float container1 = 0, container2 = 0, container3 = 0,
     price = 0;
@@ -25,7 +26,7 @@ int main ()
     
     // Open the file
     ifstream input;
-    input.open("input2.txt");
+    input.open("input 2.txt");
     
     // Check if the file exists
     if (input.fail())
@@ -35,8 +36,17 @@ int main ()
         
     }
     
+    // Welcome
+    cout << "Welcome! This is a program which tries best to help hardware enthusiasts choose the most suitable device. We'll give you the best choice(s) depending on the brand you choose!\n" << endl;
+    while (ceilingNum == 0)
+    {
+        cout << "Before we start, please enter the ceiling number." << endl;
+        cin >> ceilingNum;
+        
+    }
+    
     // Choose the preferred make
-    cout << "Please type the make that you prefer." << endl;
+    cout << "Please type the brand that you prefer." << endl;
     cin >> make;
     
     // Type the number of the features (filter conditions)
@@ -53,8 +63,11 @@ int main ()
     }
     
     // Menu
-    cout << "Welcome! This is a program which tries best to help you choose the most suitable device for you!\n" << endl;
-    cout << "" << endl;
+    cout << "Menu" << endl;
+    cout << "1. ROM size\t\t\t" << "5. Main camera\n"
+         << "2. Processor speed\t" << "6. Front camera\n"
+         << "3. Processor\t\t" << "7. Front camera\n"
+         << "4. RAM size\n";
     
     // Get the numbering of the choice(s)
     while (choiceNum != 1 && choiceNum != 2)
@@ -65,7 +78,6 @@ int main ()
         
     }
     
-    
     // Assign the choice1 (if has) and the choice2
     switch (choiceNum)
     {
@@ -73,8 +85,15 @@ int main ()
             cout << "Please enter the first feature. (1-9)" << endl;
             cin >> choice1;
             choice1 += 1;
+            break;
             
         case 2:
+            // choice1
+            cout << "Please enter the first feature. (1-9)" << endl;
+            cin >> choice1;
+            choice1 += 1;
+            
+            // choice2
             cout << "Please enter the second feature. (1-9)" << endl;
             cin >> choice2;
             choice2 += 1; // Adjust the numbering of the user input to the actual input file
@@ -95,29 +114,73 @@ int main ()
     }
     
     // Check the numbering of the choices
-    if (choiceNum == 2)
-    {
         // Judge if the feature is processor (string)
-        if (choice2 == 4)
+        if (choice1 == 4)
         {
-            cout << "Please type a processor that you prefer." << endl;
-            getline(cin, processorName);
+            cout << "Please type the number of cores of the processor that you prefer." << endl;
+            cin >> processorName;
             
             // Input
             while (input)
             {
+                
                 // If the column is 1
                 if (column == 1)
                 {
-                    input >> model; column++;
+                    input >> temp;
+                    
+                    while (temp != make)
+                    {
+                        if (!input) break;
+                        
+                        model += temp + " ";
+                        modelLength++;
+                        column++;
+                        
+                        // If the make is not as expected
+                        if (modelLength > 8)
+                        {
+                            getline(input, temp);
+                            row++;
+                            column = 1;
+                            model = "";
+                            modelLength = 0;
+                            
+                        }
+                        
+                        input >> temp;
+                        
+                    }
+                    
+                    // Check if the make is not similar to the user input
+                    if (temp != make)
+                    {
+                        // Go to the next line and throw the useless data
+                        while (i <= 6)
+                        {
+                            input >> temp;
+                            i++;
+                        }
+                        
+                        row++;
+                        column = 1;
+                    }
+                    
                     
                 }
                 
+                // 1 END
+                
                 // If the column is 3
-                else if (column == 3)
+                if (column == (modelLength + 2))
                 {
-                    input >> price;
+                    
+                    // Get the price
+                    cout << price << endl;
                     column++;
+                    
+                    
+                    
                     
                     // Check if the price is higher than the ceiling price
                     if (price > ceilingNum)
@@ -125,7 +188,6 @@ int main ()
                         i--;
                         
                         // Go to the next line and throw the useless data
-                        nextline:
                         while (i <= 6)
                         {
                             input >> temp;
@@ -140,14 +202,20 @@ int main ()
                     
                     
                 }
+                // 3 END
                 
                 // If the column is 4
-                else if (column == 4)
+                if (column == (modelLength + 3))
                 {
+                    
                     input >> temp;
+                    
+                    column++;
+                    
                     
                     if (temp == processorName)
                     {
+                        
                         // Bubble Sort Manually
                         if (price > container3)
                         {
@@ -192,62 +260,94 @@ int main ()
                             
                         }
                         
-                        else goto nextline;
+                        else
+                        {
+                            // Go to the next line and throw the useless data
+                            while (i <= 6)
+                            {
+                                input >> temp;
+                                i++;
+                            }
+                            
+                            row++;
+                            column = 1;
+                            
+                        }
                         
                         
                     }
-                    
-                    else goto nextline;
+                        
                     
                 }
                 
-            }
-            
-            // Display the result(s)
-            if (container1 == 0)
-            {
-                // Maintaining...
+                // 4 END
+                
+                // Save price in an integer
+                column++;
+                if (column == modelLength + 2)
+                {
+                    input >> price;
+                    
+                }
+                
+                else if (column == modelLength + 11)
+                {
+                    row++;
+                    column = 1;
+                    input >> temp;
+                    model = "";
+                    modelLength = 0;
+                }
+                
+                else {
+                    input >> temp;
+                    
+                }
+                
+                
                 
             }
+            // Judgement END
+        
             
-            // 1 result
-            else if (container2 == 0)
-            {
-                cout << model1 << endl;
-                cout << container1 << endl;
-            }
-            
-            // 2 results
-            else if (container3 == 0)
-            {
-                cout << model1 << endl;
-                cout << container1 << endl;
-                cout << model2 << endl;
-                cout << container2 << endl;
-                
-                
-            }
-            
-            // 3 results
-            else
-            {
-                cout << model1 << endl;
-                cout << container1 << endl;
-                cout << model2 << endl;
-                cout << container2 << endl;
-                cout << model3 << endl;
-                cout << container3 << endl;
-                
-            }
-            
-            
-            
-        }
-        // Judgement END
+        
         
         
     }
     
+    
+    // Display the result(s)
+    if (container1 == 0)
+    {
+        // Maintaining...
+        
+    }
+    
+    // 1 result
+    else if (container2 == 0)
+    {
+        cout << "Thanks for waiting. Considering your needs, we've found 1 result for you." << endl;
+        cout << model1 << " " << container1 << endl;
+    }
+    
+    // 2 results
+    else if (container3 == 0)
+    {
+        cout << "Thanks for waiting. Considering your needs, we've found 2 results for you." << endl;
+        cout << model1 << " " << container1 << endl;
+        cout << model2 << " " << container2 << endl;
+        
+    }
+    
+    // 3 results
+    else
+    {
+        cout << "Thanks for waiting. Considering your needs, we've found 3 results for you." << endl;
+        cout << model1 << " " << container1 << endl;
+        cout << model2 << " " << container2 << endl;
+        cout << model3 << " " << container3 << endl;
+        
+    }
     
     
     return 0;
