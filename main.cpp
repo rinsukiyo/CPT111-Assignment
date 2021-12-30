@@ -19,7 +19,6 @@ double serviceCharges();
 int main()
 {
     // Variable Definition
-    // Maintaining...
     double totalCost = 0;
     
     // Menu
@@ -27,7 +26,7 @@ int main()
     
     
     // Calculation
-    totalCost += hospitalStay() + surgeryCharges() + pharmacyCharges() + serviceCharges();
+    totalCost = hospitalStay() + surgeryCharges() + pharmacyCharges() + serviceCharges();
     
     cout << "in total, " << totalCost << endl;
     
@@ -36,8 +35,13 @@ int main()
 // Prototypes
 
 // Hospital costs (hospitalStay)
-double hospitalStay(int days, double temp, int room, double rate, double cost, double foodPrice)
+double hospitalStay()
 {
+    // Variables Definition
+    int days, room = 0;
+    double cost = 0, foodPrice = 0, temp = 0, rate = 0;
+    string roomName;
+    
     // Check if the user input is not a positive integer
     cout << "days" << endl;
     cin >> temp; days = temp;
@@ -49,6 +53,7 @@ double hospitalStay(int days, double temp, int room, double rate, double cost, d
     }
     
     cout << days << " days" << endl;
+    // Check END
     
     // Hospital's daily rate base on room types (5+)
     // Maintaining...
@@ -57,31 +62,37 @@ double hospitalStay(int days, double temp, int room, double rate, double cost, d
     {
         case 1:
             rate = 0;
+            roomName = "";
             
             break;
             
         case 2:
             rate = 0;
+            roomName = "";
             
             break;
             
         case 3:
             rate = 0;
+            roomName = "";
             
             break;
             
         case 4:
             rate = 0;
+            roomName = "";
             
             break;
             
         case 5:
             rate = 0;
+            roomName = "";
             
             break;
             
         default:
             rate = 0;
+            roomName = "";
             
             break;
     }
@@ -89,10 +100,14 @@ double hospitalStay(int days, double temp, int room, double rate, double cost, d
     // Daily rate
     cost += days * rate;
     
+    // Display the choice
+    cout << "You have chosen room " << room << " " << roomName << ", which is $" << rate << " per day." << endl;
+    
     // Food charges
     cout << "food or not 0no 1yes" << endl;
     cin >> temp;
     
+    // Check if the input is invalid
     while (temp != 0 && temp != 1)
     {
         cout << "Invalid input." << endl;
@@ -100,14 +115,25 @@ double hospitalStay(int days, double temp, int room, double rate, double cost, d
         
     }
     
-    if (temp == 1) cost *= foodPrice;
+    if (temp == 1)
+    {
+        cost += (foodPrice * days);
+        // Display the prices of food
+        cout << "The prices of food for " << days << " days is " << foodPrice << endl;
+    }
     
     return cost;
 }
 
 // Surgery charges (surgeryCharges)
-double surgeryCharges(int numType, int type, int timesSurgery, bool isZero, double charge, double cost = 0)
+double surgeryCharges()
 {
+    // Variables Definition
+    int numType, type, timesSurgery;
+    double charge = 0, cost = 0;
+    bool isZero;
+    
+    // Surgery menu
     cout << "surgery menu" << endl;
     cout << "num of types of surgery performed" << endl;
     cin >> numType;
@@ -222,8 +248,14 @@ double surgeryCharges(int numType, int type, int timesSurgery, bool isZero, doub
     return cost;
 }
 
-double pharmacyCharges(int numType, int type, int timesMeds, bool isZero, double charge, double cost = 0)
+double pharmacyCharges()
 {
+    // Variables Definition
+    int numType, type, timesMeds;
+    double charge = 0, cost = 0;
+    bool isZero;
+    
+    // Medication menu
     cout << "medication menu" << endl;
     cout << "num of types of medication" << endl;
     cin >> numType;
@@ -324,8 +356,14 @@ double pharmacyCharges(int numType, int type, int timesMeds, bool isZero, double
 }
 
 // Service charges (serviceCharges)
-double serviceCharges(int numType, int type, int duration, bool isZero, double charge, double cost = 0)
+double serviceCharges()
 {
+    // Variables Definition
+    int numType, type, duration;
+    double charge = 0, cost = 0;
+    bool isZero;
+    
+    // Service menu
     cout << "service menu" << endl;
     cout << "num of types of service services" << endl;
     cin >> numType;
