@@ -58,6 +58,17 @@ double hospitalStay()
     // Hospital's daily rate base on room types (5+)
     // Maintaining...
     
+    cout << "room menu" << endl;
+    cin >> room;
+    
+    // Check if the user input is not a positive integer
+    while (room < 1 || room > 4)
+    {
+        cout << "Invalid input. The number of the rooms should be 1-4." << endl;
+        cin >> room;
+    }
+    // Check END
+    
     switch (room)
     {
         case 1:
