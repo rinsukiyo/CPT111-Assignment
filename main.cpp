@@ -13,6 +13,7 @@ using namespace std;
 // Headers
 double hospitalStay();
 double surgeryCharges();
+double pharmacyCharges();
 
 int main()
 {
@@ -201,6 +202,107 @@ double surgeryCharges(int numType, int type, int temp, bool isZero, double charg
                 break;
                 
             case 10:
+                charge = 0;
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+        
+        // Add up
+        cost += (charge * temp);
+        
+    }
+    
+    return cost;
+}
+
+double pharmacyCharges(int numType, int type, int temp, bool isZero, double charge, double cost = 0)
+{
+    cout << "medication menu" << endl;
+    cout << "types of medication" << endl;
+    cin >> numType;
+    
+    // Skip the calculating pharmacy charges function if not have
+    if (numType == 0) return 0;
+    
+    // Check if less than 0 or larger than 7
+    while (numType < 0 || numType > 7)
+    {
+        cout << "can't be less than 0 or larger than 7" << endl;
+        cin >> numType;
+        
+    }
+    
+    // Calculation
+    for (int i = 0; i < numType; i++)
+    {
+        cout << "which (" << i << "/" << numType << ")" << endl;
+        cin >> type;
+        
+        // Check if less than 0 or larger than 7
+        while (type < 0 || type > 7)
+        {
+            cout << "can't be less than 0 or larger than 5" << endl;
+            cin >> type;
+            
+        }
+        
+        // How many medications done
+        cout << "how many" << endl;
+        cin >> temp;
+        
+        // Check if less than or equal to 0
+        while (temp <= 0)
+        {
+            cout << "can't be less than or equal to 0" << endl;
+            if (temp == 0)
+            {
+                cout << "r u sure it's 0? don't worry, we'll ignore it" << endl;
+                cin >> isZero;
+                if (isZero == true) break;
+                else cout << "ok, please re-enter it" << endl;
+            }
+            cin >> temp;
+            
+        }
+        
+        // Charges of different medications
+        switch (type)
+        {
+            case 1:
+                charge = 0;
+                
+                break;
+                
+            case 2:
+                charge = 0;
+                
+                break;
+                
+            case 3:
+                charge = 0;
+                
+                break;
+                
+            case 4:
+                charge = 0;
+                
+                break;
+                
+            case 5:
+                charge = 0;
+                
+                break;
+                
+            case 6:
+                charge = 0;
+                
+                break;
+                
+            case 7:
                 charge = 0;
                 
                 break;
