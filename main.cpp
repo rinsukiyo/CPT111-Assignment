@@ -29,6 +29,8 @@ int main()
     // Calculation
     totalCost += hospitalStay() + surgeryCharges() + pharmacyCharges() + serviceCharges();
     
+    cout << "in total, " << totalCost << endl;
+    
 }
 
 // Prototypes
