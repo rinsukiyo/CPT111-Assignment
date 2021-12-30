@@ -14,6 +14,7 @@ using namespace std;
 double hospitalStay();
 double surgeryCharges();
 double pharmacyCharges();
+double serviceCharges();
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
     
     
     // Calculation
-    totalCost += hospitalStay() + surgeryCharges();
+    totalCost += hospitalStay() + surgeryCharges() + pharmacyCharges() + serviceCharges();
     
 }
 
@@ -103,10 +104,10 @@ double hospitalStay(int days, double temp, int room, double rate, double cost, d
 }
 
 // Surgery charges (surgeryCharges)
-double surgeryCharges(int numType, int type, int temp, bool isZero, double charge, double cost = 0)
+double surgeryCharges(int numType, int type, int timesSurgery, bool isZero, double charge, double cost = 0)
 {
     cout << "surgery menu" << endl;
-    cout << "types of surgery performed" << endl;
+    cout << "num of types of surgery performed" << endl;
     cin >> numType;
     
     // Skip the calculating surgery charges function if not have
@@ -134,22 +135,22 @@ double surgeryCharges(int numType, int type, int temp, bool isZero, double charg
             
         }
         
-        // How many surgeries done
+        // How many times the surgery done
         cout << "how many" << endl;
-        cin >> temp;
+        cin >> timesSurgery;
         
         // Check if less than or equal to 0
-        while (temp <= 0)
+        while (timesSurgery <= 0)
         {
             cout << "can't be less than or equal to 0" << endl;
-            if (temp == 0)
+            if (timesSurgery == 0)
             {
                 cout << "r u sure it's 0? don't worry, we'll ignore it" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
                 else cout << "ok, please re-enter it" << endl;
             }
-            cin >> temp;
+            cin >> timesSurgery;
             
         }
         
@@ -212,17 +213,17 @@ double surgeryCharges(int numType, int type, int temp, bool isZero, double charg
         }
         
         // Add up
-        cost += (charge * temp);
+        cost += (charge * timesSurgery);
         
     }
     
     return cost;
 }
 
-double pharmacyCharges(int numType, int type, int temp, bool isZero, double charge, double cost = 0)
+double pharmacyCharges(int numType, int type, int timesMeds, bool isZero, double charge, double cost = 0)
 {
     cout << "medication menu" << endl;
-    cout << "types of medication" << endl;
+    cout << "num of types of medication" << endl;
     cin >> numType;
     
     // Skip the calculating pharmacy charges function if not have
@@ -250,22 +251,22 @@ double pharmacyCharges(int numType, int type, int temp, bool isZero, double char
             
         }
         
-        // How many medications done
+        // How many times the medication done
         cout << "how many" << endl;
-        cin >> temp;
+        cin >> timesMeds;
         
         // Check if less than or equal to 0
-        while (temp <= 0)
+        while (timesMeds <= 0)
         {
             cout << "can't be less than or equal to 0" << endl;
-            if (temp == 0)
+            if (timesMeds == 0)
             {
                 cout << "r u sure it's 0? don't worry, we'll ignore it" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
                 else cout << "ok, please re-enter it" << endl;
             }
-            cin >> temp;
+            cin >> timesMeds;
             
         }
         
@@ -313,9 +314,116 @@ double pharmacyCharges(int numType, int type, int temp, bool isZero, double char
         }
         
         // Add up
-        cost += (charge * temp);
+        cost += (charge * timesMeds);
         
     }
     
     return cost;
+}
+
+// Service charges (serviceCharges)
+double serviceCharges(int numType, int type, int duration, bool isZero, double charge, double cost = 0)
+{
+    cout << "service menu" << endl;
+    cout << "num of types of service services" << endl;
+    cin >> numType;
+    
+    // Skip the calculating service charges function if not have
+    if (numType == 0) return 0;
+    
+    // Check if less than 0 or larger than 10
+    while (numType < 0 || numType > 8)
+    {
+        cout << "can't be less than 0 or larger than 8" << endl;
+        cin >> numType;
+        
+    }
+    
+    // Calculation
+    for (int i = 0; i < numType; i++)
+    {
+        cout << "which (" << i << "/" << numType << ")" << endl;
+        cin >> type;
+        
+        // Check if less than 0 or larger than 8
+        while (type < 0 || type > 8)
+        {
+            cout << "can't be less than 0 or larger than 8" << endl;
+            cin >> type;
+            
+        }
+        
+        // Get the duration of the service
+        cout << "how many" << endl;
+        cin >> duration;
+        
+        // Check if less than or equal to 0
+        while (duration <= 0)
+        {
+            cout << "can't be less than or equal to 0" << endl;
+            if (duration == 0)
+            {
+                cout << "r u sure it's 0? don't worry, we'll ignore it" << endl;
+                cin >> isZero;
+                if (isZero == true) break;
+                else cout << "ok, please re-enter it" << endl;
+            }
+            cin >> duration;
+            
+        }
+        
+        // Charges of different services
+        switch (type)
+        {
+            case 1:
+                charge = 0;
+                
+                break;
+                
+            case 2:
+                charge = 0;
+                
+                break;
+                
+            case 3:
+                charge = 0;
+                
+                break;
+                
+            case 4:
+                charge = 0;
+                
+                break;
+                
+            case 5:
+                charge = 0;
+                
+                break;
+                
+            case 6:
+                charge = 0;
+                
+                break;
+                
+            case 7:
+                charge = 0;
+                
+                break;
+                
+            case 8:
+                charge = 0;
+                
+                break;
+                
+            default:
+                
+                break;
+        }
+        
+        // Add up
+        cost += (charge * duration);
+        
+    }
+    
+    return 0;
 }
