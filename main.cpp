@@ -47,12 +47,14 @@ int main()
     totalCost = hospital + surgery + pharmacy + service;
     
     // Display the charges separately and the total cost
+    cout << "------------------------------------------------------------------" << endl;
     cout << "Hospital costs: $" << hospital << "\n"
          << "Surgery charges: $" << surgery << "\n"
          << "Pharmacy charges: $" << pharmacy << "\n"
          << "Service charges: $" << service << ".\n";
     
     cout << "Totally, the charge is $" << totalCost << endl;
+    cout << "Wish you a speedy recovery!!!" << endl;
     
 }
 
@@ -88,12 +90,13 @@ double hospitalStay()
     // Maintaining...
     
     // Room Menu
-    cout << "room menu:" << endl;
-    cout << "1.Twin Sharing Room: $100 per day" << endl;
-    cout << "2.Deluxe Room: $150 per day" << endl;
-    cout << "3.Premium Deluxe: $170 per day" << endl;
-    cout << "4.Suite: $200 per day" << endl;
-    cout << "Please enter the room code (1-4)" << endl;
+    cout << "------------------------------------------------------------------" << endl;
+    cout << "****************************Room Menu:****************************" << endl;
+    cout << "*****************1.Twin Sharing Room: $100 per day****************" << endl;
+    cout << "*****************2.Deluxe Room: $150 per day**********************" << endl;
+    cout << "*****************3.Premium Deluxe: $170 per day*******************" << endl;
+    cout << "*****************4.Suite: $200 per day****************************" << endl;
+    cout << "*****************Please enter the room code (1-4)*****************" << endl;
     cin >> temp;
     room = temp;
     
@@ -171,17 +174,18 @@ double surgeryCharges()
     string surgeryName;
     
     // Surgery Menu
-    cout << "surgery menu£º" << endl;
-    cout << "1.heart valve replacement: $170,000" << endl;
-    cout << "2.heart bypass: $123,000" << endl;
-    cout << "3.spinal fusion: $110,000" << endl;
-    cout << "4.hip replacement: $40,364" << endl;
-    cout << "5.knee replacement: $35,000" << endl;
-    cout << "6.angioplasty: $282,000" << endl;
-    cout << "7.hip resurfacing: $28,000" << endl;
-    cout << "8.gastric bypass: $25,000" << endl;
-    cout << "9.cornea: $17,500" << endl;
-    cout << "10.gastric sleeve: $16,000" << endl;
+    cout << "------------------------------------------------------------------" << endl;
+    cout << "**************************Surgery Menu:***************************" << endl;
+    cout << "*****************1.heart valve replacement: $170,000**************" << endl;
+    cout << "*****************2.heart bypass: $123,000*************************" << endl;
+    cout << "*****************3.spinal fusion: $110,000************************" << endl;
+    cout << "*****************4.hip replacement: $40,364***********************" << endl;
+    cout << "*****************5.knee replacement: $35,000**********************" << endl;
+    cout << "*****************6.angioplasty: $282,000**************************" << endl;
+    cout << "*****************7.hip resurfacing: $28,000***********************" << endl;
+    cout << "*****************8.gastric bypass: $25,000************************" << endl;
+    cout << "*****************9.cornea: $17,500********************************" << endl;
+    cout << "*****************10.gastric sleeve: $16,000***********************" << endl;
     cout << "Please select the number of times the procedure was done (1-10)" << endl;
     cin >> temp;
     numType = temp;
@@ -321,15 +325,16 @@ double pharmacyCharges()
     string medsName;
     
     // Medication menu
-    cout << "medication menu" << endl;
-    cout << "surgical bra:$30.70" << endl;
-    cout << "abdominal or spinal support: $46.30" << endl;
-    cout << "Etanercept: $2,225" << endl;
-    cout << "Celecoxib: $225" << endl;
-    cout << "Glatiramer: $3,903" << endl;
-    cout << "Duloxetine: $194" << endl;
-    cout << "Esomeprazole: $215" << endl;
-    cout << "How many drugs were used?" << endl;
+    cout << "------------------------------------------------------------------" << endl;
+    cout << "**************************medication menu*************************" << endl;
+    cout << "**********************1.surgical bra:$30.70***********************" << endl;
+    cout << "**********************2.abdominal or spinal support: $46.30*******" << endl;
+    cout << "**********************3.Etanercept: $2,225************************" << endl;
+    cout << "**********************4.Celecoxib: $225***************************" << endl;
+    cout << "**********************5.Glatiramer: $3,903************************" << endl;
+    cout << "**********************6.Duloxetine: $194**************************" << endl;
+    cout << "**********************7.Esomeprazole: $215************************" << endl;
+    cout << "********************How many drugs were used?*********************" << endl;
     cin >> temp;
     numType = temp;
     
@@ -453,16 +458,17 @@ double serviceCharges()
     string serviceName;
     
     // Service menu
-    cout << "Service menu:" << endl;
-    cout << "X-ray/radiology:$100" << endl;
-    cout << "laboratory test:$55" << endl;
-    cout << "physiotherapy:$60" << endl;
-    cout << "ultrasound:$130" << endl;
-    cout << "bone mineral densitometry:$148" << endl;
-    cout << "fluoroscopy:$245" << endl;
-    cout << "mammography:$130" << endl;
-    cout << "nuclear medicine:$120" << endl;
-    cout << "Please enter the number of services" << endl;
+    cout << "------------------------------------------------------------------" << endl;
+    cout << "**************************Service menu:***************************" << endl;
+    cout << "********************1.X-ray/radiology:$100************************" << endl;
+    cout << "********************2.laboratory test:$55*************************" << endl;
+    cout << "********************3.physiotherapy:$60***************************" << endl;
+    cout << "********************4.ultrasound:$130*****************************" << endl;
+    cout << "********************5.bone mineral densitometry:$148**************" << endl;
+    cout << "********************6.fluoroscopy:$245****************************" << endl;
+    cout << "********************7.mammography:$130****************************" << endl;
+    cout << "********************8.nuclear medicine:$120***********************" << endl;
+    cout << "*************Please enter the number of services******************" << endl;
     cin >> temp;
     numType = temp;
     
