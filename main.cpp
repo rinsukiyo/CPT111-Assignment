@@ -9,6 +9,17 @@
 #include <string>
 
 using namespace std;
+//Show the menu interface
+void showMenu()
+{
+	cout << "******************************************************************" << endl;
+	cout << "************ Welcome to the hospital billing system! *************" << endl;
+	cout << "***** Please enter your choice according to the instructions *****" << endl;
+	cout << "************************Type Enter to start***********************" << endl;
+	cout << "******************************************************************" << endl;
+	cin.get();
+	
+}
 
 // Headers
 double hospitalStay();
@@ -16,14 +27,16 @@ double surgeryCharges();
 double pharmacyCharges();
 double serviceCharges();
 
+
 int main()
 {
+
     // Variable Definition
     double totalCost = 0, hospital, surgery, pharmacy, service;
     
     // Menu
-    // Maintaining...
-    cout << "Welcome!" << endl;
+    showMenu();
+
     
     // Calculation
     hospital = hospitalStay();
@@ -54,7 +67,7 @@ double hospitalStay()
     string roomName;
     
     // Check if the user input is negative
-    cout << "days" << endl;
+    cout << "Please enter the length of stay (days)" << endl;
     cin >> temp; days = temp;
     
     while (days != temp || temp < 0)
@@ -75,8 +88,14 @@ double hospitalStay()
     // Maintaining...
     
     // Room Menu
-    cout << "room menu" << endl;
-    cin >> room;
+    cout << "room menu:" << endl;
+    cout << "1.Twin Sharing Room: $100 per day" << endl;
+    cout << "2.Deluxe Room: $150 per day" << endl;
+    cout << "3.Premium Deluxe: $170 per day" << endl;
+    cout << "4.Suite: $200 per day" << endl;
+    cout << "Please enter the room code (1-4)" << endl;
+    cin >> temp;
+    room = temp;
     
     // Check if the user input is not a positive integer
     while (room < 1 || room > 4 || temp != room)
@@ -120,7 +139,7 @@ double hospitalStay()
     cout << "You have chosen Room Type " << room << ": " << roomName << ", which is $" << rate << " per day." << endl;
     
     // Food charges
-    cout << "Food or not? (0no 1yes)" << endl;
+    cout << "Whether or not they ordered the nutritious meals provided by the hospital(1:yes  0:no)" << endl;
     cin >> temp;
     
     // Check if the input is invalid
@@ -152,8 +171,18 @@ double surgeryCharges()
     string surgeryName;
     
     // Surgery Menu
-    cout << "surgery menu" << endl;
-    cout << "num of types of surgery performed" << endl;
+    cout << "surgery menu£º" << endl;
+    cout << "1.heart valve replacement: $170,000" << endl;
+    cout << "2.heart bypass: $123,000" << endl;
+    cout << "3.spinal fusion: $110,000" << endl;
+    cout << "4.hip replacement: $40,364" << endl;
+    cout << "5.knee replacement: $35,000" << endl;
+    cout << "6.angioplasty: $282,000" << endl;
+    cout << "7.hip resurfacing: $28,000" << endl;
+    cout << "8.gastric bypass: $25,000" << endl;
+    cout << "9.cornea: $17,500" << endl;
+    cout << "10.gastric sleeve: $16,000" << endl;
+    cout << "Please select the number of times the procedure was done (1-10)" << endl;
     cin >> temp;
     numType = temp;
     
@@ -172,7 +201,7 @@ double surgeryCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << endl;
+        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the operation)"<<endl;
         cin >> temp;
         type = temp;
         
@@ -186,7 +215,7 @@ double surgeryCharges()
         }
         
         // How many times the surgery done
-        cout << "how many" << endl;
+        cout << "How many times was this surgery done?" << endl;
         cin >> temp;
         timesSurgery = temp;
         
@@ -196,7 +225,7 @@ double surgeryCharges()
             cout << "integer, can't be less than or equal to 0" << endl;
             if (timesSurgery == 0)
             {
-                cout << "r u sure it's 0? don't worry, we'll ignore it (1yes 0no, i'll re-enter a number)" << endl;
+                cout << "r u sure it's 0? don't worry, we'll ignore it (1:yes 0:no, i'll re-enter a number)" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
                 else cout << "ok, please re-enter it" << endl;
@@ -293,7 +322,14 @@ double pharmacyCharges()
     
     // Medication menu
     cout << "medication menu" << endl;
-    cout << "num of types of medication" << endl;
+    cout << "surgical bra:$30.70" << endl;
+    cout << "abdominal or spinal support: $46.30" << endl;
+    cout << "Etanercept: $2,225" << endl;
+    cout << "Celecoxib: $225" << endl;
+    cout << "Glatiramer: $3,903" << endl;
+    cout << "Duloxetine: $194" << endl;
+    cout << "Esomeprazole: $215" << endl;
+    cout << "How many drugs were used?" << endl;
     cin >> temp;
     numType = temp;
     
@@ -312,7 +348,7 @@ double pharmacyCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << endl;
+        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the drug)"<< endl;
         cin >> temp;
         type = temp;
         
@@ -326,7 +362,7 @@ double pharmacyCharges()
         }
         
         // How many times the medication done
-        cout << "how many" << endl;
+        cout << "Number of uses of this drug" << endl;
         cin >> temp;
         timesMeds = temp;
         
@@ -417,8 +453,16 @@ double serviceCharges()
     string serviceName;
     
     // Service menu
-    cout << "service menu" << endl;
-    cout << "num of types of service services" << endl;
+    cout << "Service menu:" << endl;
+    cout << "X-ray/radiology:$100" << endl;
+    cout << "laboratory test:$55" << endl;
+    cout << "physiotherapy:$60" << endl;
+    cout << "ultrasound:$130" << endl;
+    cout << "bone mineral densitometry:$148" << endl;
+    cout << "fluoroscopy:$245" << endl;
+    cout << "mammography:$130" << endl;
+    cout << "nuclear medicine:$120" << endl;
+    cout << "Please enter the number of services" << endl;
     cin >> temp;
     numType = temp;
     
@@ -437,7 +481,7 @@ double serviceCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << endl;
+        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the service)"<< endl;
         cin >> temp;
         type = temp;
         
@@ -451,7 +495,7 @@ double serviceCharges()
         }
         
         // Get the duration of the service
-        cout << "how many" << endl;
+        cout << "How many times has the service been done?" << endl;
         cin >> temp;
         duration = temp;
         
