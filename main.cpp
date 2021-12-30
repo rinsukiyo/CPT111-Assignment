@@ -126,10 +126,10 @@ double surgeryCharges(int numType, int type, int temp, bool isZero, double charg
         cin >> type;
         
         // Check if less than 0 or larger than 10
-        while (numType < 0 || numType > 10)
+        while (type < 0 || type > 10)
         {
             cout << "can't be less than 0 or larger than 5" << endl;
-            cin >> numType;
+            cin >> type;
             
         }
         
