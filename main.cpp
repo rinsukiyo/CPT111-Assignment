@@ -9,6 +9,7 @@
 #include <string>
 
 using namespace std;
+
 //Show the menu interface
 void showMenu()
 {
@@ -48,13 +49,16 @@ int main()
     
     // Display the charges separately and the total cost
     cout << "------------------------------------------------------------------" << endl;
+    cout << "Bill" << endl;
     cout << "Hospital costs: $" << hospital << "\n"
          << "Surgery charges: $" << surgery << "\n"
          << "Pharmacy charges: $" << pharmacy << "\n"
-         << "Service charges: $" << service << ".\n";
+         << "Service charges: $" << service << "\n\n";
     
-    cout << "Totally, the charge is $" << totalCost << endl;
-    cout << "Wish you a speedy recovery!!!" << endl;
+    cout << "In total, the charge is $" << totalCost << "." << endl;
+    cout << "Wish you a speedy recovery!" << endl;
+    
+    return 0;
     
 }
 
@@ -69,26 +73,24 @@ double hospitalStay()
     string roomName;
     
     // Check if the user input is negative
-    cout << "Please enter the length of stay (days)" << endl;
+    cout << "Please enter the length of the hospitalized days. (0 - not hospitalized)" << endl;
     cin >> temp; days = temp;
     
     while (days != temp || temp < 0)
     {
-        cout << "Invalid input. The number of days spent in the hospital should be an integer larger than or equal to 0." << endl;
+        cout << "Invalid input. The number of the hospitalized days should be a non-negative integer. (0+)" << endl;
         cin >> temp; days = temp;
     }
     // Check END
     
     if (days == 0) return 0;
     
-    // Display the days spend in the hospital
-    if (days == 1) cout << days << " day" << endl;
-    else cout << days << " days" << endl;
+    // Display the number of the hospitalized days
+    cout << "The patient needs to be hospitalized for ";
+    
+    if (days == 1) cout << days << " day." << endl;
+    else cout << days << " days." << endl;
 
-    
-    // Hospital's daily rate base on room types (5+)
-    // Maintaining...
-    
     // Room Menu
     cout << "------------------------------------------------------------------" << endl;
     cout << "****************************Room Menu:****************************" << endl;
@@ -100,15 +102,16 @@ double hospitalStay()
     cin >> temp;
     room = temp;
     
-    // Check if the user input is not a positive integer
+    // Check if the user input is incorrect
     while (room < 1 || room > 4 || temp != room)
     {
-        cout << "Invalid input. The number of the rooms should be a positive integer from 1 to 4." << endl;
+        cout << "Invalid input. The number of the rooms should be a positive integer. (1-4)" << endl;
         cin >> temp;
         room = temp;
     }
     // Check END
     
+    // Hospital's daily rate base on room types
     switch (room)
     {
         case 1:
@@ -142,7 +145,7 @@ double hospitalStay()
     cout << "You have chosen Room Type " << room << ": " << roomName << ", which is $" << rate << " per day." << endl;
     
     // Food charges
-    cout << "Whether or not they ordered the nutritious meals provided by the hospital(1:yes  0:no)" << endl;
+    cout << "Does the patient need the meals provided by the hospital? (1 - Yes, 0 - No)" << endl;
     cin >> temp;
     
     // Check if the input is invalid
@@ -156,9 +159,10 @@ double hospitalStay()
     if (temp == 1)
     {
         cost += (foodPrice * days);
-        // Display the prices of food
-        if (days == 1) cout << "The prices of food for 1 day is $" << foodPrice << "." << endl;
-        else cout << "The prices of food for " << days << " days is $" << foodPrice * days << "." << endl;
+        
+        // Display the prices of the meals
+        if (days == 1) cout << "The prices of the meals for 1 day is $" << foodPrice << "." << endl;
+        else cout << "The prices of the meals for " << days << " days is $" << foodPrice * days << "." << endl;
     }
     
     return cost;
@@ -186,7 +190,8 @@ double surgeryCharges()
     cout << "*****************8.gastric bypass: $25,000************************" << endl;
     cout << "*****************9.cornea: $17,500********************************" << endl;
     cout << "*****************10.gastric sleeve: $16,000***********************" << endl;
-    cout << "Please select the number of times the procedure was done (1-10)" << endl;
+    
+    cout << "How many types of surgeries are done? (1-10, 0 to skip)" << endl;
     cin >> temp;
     numType = temp;
     
@@ -196,7 +201,7 @@ double surgeryCharges()
         // Skip the calculating surgery charges function if not have
         if (numType == 0 && temp == numType) return 0;
         
-        cout << "The number of the types of the surgeires should be a non-negative integer from 0 to 10." << endl;
+        cout << "The number of the types of the surgeires should be a non-negative integer (0-10, 0 to skip)" << endl;
         cin >> temp;
         numType = temp;
         
@@ -205,34 +210,35 @@ double surgeryCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the operation)"<<endl;
+        cout << "Please enter the numbering of the surgery (" << i << "/" << numType << ")" <<endl;
         cin >> temp;
         type = temp;
         
         // Check if less than 0 or larger than 10
         while (type <= 0 || type > 10 || type != temp)
         {
-            cout << "integer, can't be less than or equal to 0, or larger than 10" << endl;
+            cout << "Invalid input. The numbering should be a positive integer (1-10)" << endl;
             cin >> temp;
             type = temp;
             
         }
         
         // How many times the surgery done
-        cout << "How many times was this surgery done?" << endl;
+        cout << "How many times is the current surgery done? (" << i << "/" << numType << ")" << endl;
         cin >> temp;
         timesSurgery = temp;
         
         // Check if less than or equal to 0
         while (timesSurgery <= 0 || timesSurgery != temp)
         {
-            cout << "integer, can't be less than or equal to 0" << endl;
+            cout << "Invalid input. The times of the surgery done should be a positive integer. (0 to skip)" << endl;
             if (timesSurgery == 0)
             {
-                cout << "r u sure it's 0? don't worry, we'll ignore it (1:yes 0:no, i'll re-enter a number)" << endl;
+                cout << "Are you sure the times of the surgery is 0? Don't worry, we'll skip it if you want." << endl;
+                cout << "Do you want to skip it? (1 - Yes, 0 - No)" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
-                else cout << "ok, please re-enter it" << endl;
+                else cout << "Please re-enter the times of the surgery." << endl;
             }
             cin >> timesSurgery;
             
@@ -334,17 +340,18 @@ double pharmacyCharges()
     cout << "**********************5.Glatiramer: $3,903************************" << endl;
     cout << "**********************6.Duloxetine: $194**************************" << endl;
     cout << "**********************7.Esomeprazole: $215************************" << endl;
-    cout << "********************How many drugs were used?*********************" << endl;
+    
+    cout << "How many kinds of medications are used? (1-7, 0 to skip)" << endl;
     cin >> temp;
     numType = temp;
     
     // Check if less than 0 or larger than 7
     while (numType < 0 || numType > 7 || numType != temp)
     {
-        // Skip the calculating surgery charges function if not have
+        // Skip the calculating medication charges function if not have
         if (numType == 0 && temp == numType) return 0;
         
-        cout << "an integer, can't be less than 0 or larger than 7" << endl;
+        cout << "Invalid input. The kinds of the medications should be a non-negative integer, (1-7, 0 to skip)" << endl;
         cin >> temp;
         numType = temp;
         
@@ -353,34 +360,35 @@ double pharmacyCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the drug)"<< endl;
+        cout << "Please enter the numbering of the medication. (" << i << "/" << numType << ")" << endl;
         cin >> temp;
         type = temp;
         
         // Check if less than 0 or larger than 7
         while (type <= 0 || type > 7 || type != temp)
         {
-            cout << "integer, can't be less than or equal to 0, or larger than 7" << endl;
+            cout << "Invalid input. The numbering of the medication should be a positive integer. (1-7)" << endl;
             cin >> temp;
             type = temp;
             
         }
         
-        // How many times the medication done
-        cout << "Number of uses of this drug" << endl;
+        // How many times the medication used
+        cout << "How many times is the current medication used? (" << i << "/" << numType << ")" << endl;
         cin >> temp;
         timesMeds = temp;
         
         // Check if less than or equal to 0
         while (timesMeds <= 0 || timesMeds != temp)
         {
-            cout << "integer, can't be less than or equal to 0" << endl;
+            cout << "Invalid input. The times of the medication used should be a non-negative integer (1+, 0 to skip)" << endl;
             if (timesMeds == 0)
             {
-                cout << "r u sure it's 0? don't worry, we'll ignore it (1yes 0no, i'll re-enter a number)" << endl;
+                cout << "Are you sure the times of the medication used is 0? Don't worry, we'll skip it if you want." << endl;
+                cout << "Do you want to skip it? (1 - Yes, 0 - No)" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
-                else cout << "ok, please re-enter it" << endl;
+                else cout << "Please re-enter the times of the medication used. (1+, 0 to skip)" << endl;
             }
             cin >> temp;
             timesMeds = temp;
@@ -452,7 +460,7 @@ double pharmacyCharges()
 double serviceCharges()
 {
     // Variables Definition
-    int numType, type, duration;
+    int numType, type, frequency;
     double charge = 0, cost = 0, temp = 0;
     bool isZero;
     string serviceName;
@@ -468,17 +476,18 @@ double serviceCharges()
     cout << "********************6.fluoroscopy:$245****************************" << endl;
     cout << "********************7.mammography:$130****************************" << endl;
     cout << "********************8.nuclear medicine:$120***********************" << endl;
-    cout << "*************Please enter the number of services******************" << endl;
+    
+    cout << "How many kinds was the service? (1-8, 0 to skip)" << endl;
     cin >> temp;
     numType = temp;
     
-    // Check if less than or equal to 0, or larger than 10
+    // Check if less than or equal to 0, or larger than 8
     while (numType <= 0 || numType > 8 || numType != temp)
     {
         // Skip the calculating service charges function if not have
         if (numType == 0) return 0;
         
-        cout << "integer, can't be less than 0 or larger than 8" << endl;
+        cout << "Invalid input. The kinds of the services used should be a non-negative integer (1-8, 0 to skip)" << endl;
         cin >> temp;
         numType = temp;
         
@@ -487,36 +496,37 @@ double serviceCharges()
     // Calculation
     for (int i = 1; i <= numType; i++)
     {
-        cout << "which (" << i << "/" << numType << ")" << "(Serial number of the service)"<< endl;
+        cout << "Please type the numbering of the service. (" << i << "/" << numType << ")" << endl;
         cin >> temp;
         type = temp;
         
         // Check if less than 0 or larger than 8
         while (type <= 0 || type > 8 || type != temp)
         {
-            cout << "integer, can't be less than or equal to 0, or larger than 8" << endl;
+            cout << "Invalid input. The numbering of the service should be a positive integer. (1-8)" << endl;
             cin >> temp;
             type = temp;
             
         }
         
         // Get the duration of the service
-        cout << "How many times has the service been done?" << endl;
+        cout << "How many times is the current service done? (" << i << "/" << numType << ")" << endl;
         cin >> temp;
-        duration = temp;
+        frequency = temp;
         
         // Check if less than or equal to 0
-        while (duration <= 0 || duration != temp)
+        while (frequency <= 0 || frequency != temp)
         {
-            cout << "integer, can't be less than or equal to 0" << endl;
-            if (duration == 0)
+            cout << "Invalid input. The times of the service done should be a non-negative integer (1+, 0 to skip)" << endl;
+            if (frequency == 0)
             {
-                cout << "r u sure it's 0? don't worry, we'll ignore it (1yes 0no, i'll re-enter a number)" << endl;
+                cout << "Are you sure the frequency of the service is 0? Don't worry, we'll skip it if you want." << endl;
+                cout << "Do you want to skip it? (1 - Yes, 0 - No)" << endl;
                 cin >> isZero;
                 if (isZero == true) break;
-                else cout << "ok, please re-enter it" << endl;
+                else cout << "Please re-enter the frequency of the service." << endl;
             }
-            cin >> duration;
+            cin >> frequency;
             
         }
         
@@ -577,12 +587,12 @@ double serviceCharges()
         }
         
         // Add up
-        cost += (charge * duration);
+        cost += (charge * frequency);
         
         // Display the details
-        cout << serviceName << " x " << duration << ", cost $" << (charge * duration) << " (" << i << "/" << numType << ")" << endl;
+        cout << serviceName << " x " << frequency << ", cost $" << (charge * frequency) << " (" << i << "/" << numType << ")" << endl;
         
     }
     
-    return 0;
+    return cost;
 }
