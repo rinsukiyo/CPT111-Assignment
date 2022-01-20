@@ -2,7 +2,7 @@
 //  main.cpp
 //  CPT111
 //
-//  Created by Rinsuki on 30/12/2021.
+//  Created by Rinsuki on 21/01/2022.
 //
 
 #include <iostream>
@@ -10,65 +10,210 @@
 
 using namespace std;
 
-//Show the menu interface
-void showMenu()
-{
-    cout << "******************************************************************" << endl;
-    cout << "************ Welcome to the hospital billing system! *************" << endl;
-    cout << "***** Please enter your choice according to the instructions *****" << endl;
-    cout << "************************Type Enter to start***********************" << endl;
-    cout << "******************************************************************" << endl;
-    cin.get();
-    
-}
-
 // Headers
-double hospitalStay();
+void displayMenu();
+int getPatientNum();
+double hospitalStay(int &);
 double surgeryCharges();
 double pharmacyCharges();
 double serviceCharges();
+double eachCost(double, double, double, double);
 
 
 int main()
 {
-
+    // Show the Menu
+    displayMenu();
+    
+    // Get the number of the patients
+    const int patientNum = getPatientNum();
+    
     // Variable Definition
-    double totalCost = 0, hospital, surgery, pharmacy, service;
+    double totalCost = 0, hospital[patientNum], surgery[patientNum],
+    pharmacy[patientNum], service[patientNum],
+    total[patientNum];
+    int eachDays, totalDays = 0;
     
-    // Menu
-    showMenu();
+    // Send the values to the array
+    for (int i = 0; i < patientNum; i++)
+    {
+        cout << "Please enter the details of patient " << i + 1 << ". (" << i + 1 << "/" << patientNum << ")" << endl;
+        
+        hospital[i] = hospitalStay(eachDays);
+        totalDays += eachDays;
+        
+        surgery[i] = surgeryCharges();
+        pharmacy[i] = pharmacyCharges();
+        service[i] = serviceCharges();
+        
+    }
+    
+    // Display the costs of each patient, and calculate the total cost of each patient
+    cout << "Costs of each patient: " << endl;
+    for (int i = 0; i < patientNum; i++)
+    {
+        cout << "Patient " << i + 1 << endl;
+        total[i] = eachCost(hospital[i], surgery[i], pharmacy[i], service[i]);
+        cout << endl;
+        
+    }
+    
+    // Display the total costs of all the patients
+    for (int i = 0; i < patientNum; i++)
+    {
+        totalCost += total[i];
+        
+    }
+    
+    cout << "The total costs of all the patients is $" << totalCost << "." << endl;
+    
+    // Categorized by the different types, display the total costs of all the patients
+    double totalHospitalStay = 0, totalSurgery = 0, totalPharmacy = 0, totalService = 0;
+    for (int i = 0; i < patientNum; i++)
+    {
+        totalHospitalStay += hospital[i];
+        totalSurgery += surgery[i];
+        totalPharmacy += pharmacy[i];
+        totalService += service[i];
+        
+    }
+    
+    cout << "The total costs by different types are below: \n"
+    << "The total costs of the hospital staying is $" << totalHospitalStay << "\n"
+    << "The total surgery charges is $" << totalSurgery << "\n"
+    << "The total pharmacy charges is $" << totalPharmacy << "\n"
+    << "The total service charges is $" << totalService << "." << endl;
+    
+    // Calculate and display the average hospital stay for each patient
+    double avgStay = totalHospitalStay / patientNum;
+    cout << "The average hospital stay for each patient is " << avgStay << " days." << endl;
+    
+    // Find the patient who pays the highest bills, and who pays the lowest
+    string lowestPatient = "1", highestPatient = "1";
+    double lowestCost, highestCost;
+    
+    if (patientNum == 1)
+    {
+        cout << "The patient who pays lowest and the highest bills is patient 1." << endl;
+        cout << "Lowest / Highest Bills: $" << total[0] << endl;
+        
+    } else
+    {
+        // Initialize the lowest and the highest bills
+        lowestCost = highestCost = total[0];
+        
+        for (int i = 1; i < patientNum; i++)
+        {
+            
+            // Lowest Bills
+            if (total[i] <= lowestCost)
+            {
+                // If the costs of a patient is equal to another one, who has the lowest bills
+                if (total[i] == lowestCost)
+                {
+                    lowestPatient += ", ";
+                    lowestPatient += static_cast<char>(i + 1);
+                    
+                } else
+                {
+                    lowestCost = total[i];
+                    lowestPatient = static_cast<char>(i + 1);
+                }
+                
+            }
+            
+            // Highest Bills
+            if (total[i] <= highestCost)
+            {
+                // If the costs of a patient is equal to another one, who has the higher bills
+                if (total[i] == highestCost)
+                {
+                    highestPatient += ", ";
+                    highestPatient += static_cast<char>(i + 1);
+                    
+                } else
+                {
+                    highestCost = total[i];
+                    highestPatient = static_cast<char>(i + 1);
+                }
+                
+            }
+            
+            
+        }
+        
+        // Display the results about who paying the highest bills and the lowest bills
+        cout << "Paying the highest bills: Patient " << highestPatient << " ($" << highestCost << ")\n"
+        << "Paying the lowest bills: Patient " << lowestPatient << " ($" << lowestCost << ")" << endl;
+        
+    }
+    
 
     
-    // Calculation
-    hospital = hospitalStay();
-    surgery = surgeryCharges();
-    pharmacy = pharmacyCharges();
-    service = serviceCharges();
-    
-    totalCost = hospital + surgery + pharmacy + service;
-    
-    // Display the charges separately and the total cost
-    cout << "------------------------------------------------------------------" << endl;
-    cout << "Bill" << endl;
-    cout << "Hospital costs: $" << hospital << "\n"
-         << "Surgery charges: $" << surgery << "\n"
-         << "Pharmacy charges: $" << pharmacy << "\n"
-         << "Service charges: $" << service << "\n\n";
-    
-    cout << "In total, the charge is $" << totalCost << "." << endl;
-    cout << "Wish you a speedy recovery!" << endl;
+//    // Calculation
+//    hospital = hospitalStay();
+//    surgery = surgeryCharges();
+//    pharmacy = pharmacyCharges();
+//    service = serviceCharges();
+//
+//    totalCost = hospital + surgery + pharmacy + service;
+//
+//    // Display the charges separately and the total cost
+//    cout << "------------------------------------------------------------------" << endl;
+//    cout << "Bill" << endl;
+//    cout << "Hospital costs: $" << hospital << "\n"
+//         << "Surgery charges: $" << surgery << "\n"
+//         << "Pharmacy charges: $" << pharmacy << "\n"
+//         << "Service charges: $" << service << "\n\n";
+//
+//    cout << "In total, the charge is $" << totalCost << "." << endl;
+//    cout << "Wish you a speedy recovery!" << endl;
     
     return 0;
     
 }
 
 // Prototypes
+void displayMenu()
+{
+    cout << "******************************************************************" << endl;
+    cout << "********** Welcome to the hospital billing system 2.0! ***********" << endl;
+    cout << "***** Please enter your choice according to the instructions *****" << endl;
+    cout << "*********************** Type ENTER to start **********************" << endl;
+    cout << "******************************************************************" << endl;
+    cin.get();
+    
+}
+
+// Get the number of the patients
+// Input Validation: a positive integer
+int getPatientNum()
+{
+    // Initialization
+    double temp = 0.1;
+    int num = 0;
+    
+    cout << "Please enter the number of the patients." << endl;
+    cin >> temp;
+    num = temp;
+    
+    while (num != temp || temp < 1)
+    {
+        cout << "Invalid input. The number of the patients should be a positive integer." << endl;
+        cout << "Please re-enter the number of the patients." << endl;
+        cin >> temp;
+        num = temp;
+        
+    }
+    
+    return num;
+}
 
 // Hospital costs (hospitalStay)
-double hospitalStay()
+double hospitalStay(int &days)
 {
     // Variables Definition
-    int days, room = 0;
+    int room = 0;
     double cost = 0, foodPrice = 25, temp = 0, rate = 0;
     string roomName;
     
@@ -595,4 +740,19 @@ double serviceCharges()
     }
     
     return cost;
+}
+
+double eachCost(double hospital, double surgery, double pharmacy, double service)
+{
+    // Variable Definition
+    double total = hospital + surgery + pharmacy + service;
+    
+    cout << "Hospital costs: " << hospital << "\n"
+    << "Service charges: " << surgery << "\n"
+    << "Pharmacy charges: " << pharmacy << "\n"
+    << "Service charges: " << service << "\n"
+    << "The total cost is $" << total << endl;
+    
+    return total;
+    
 }
