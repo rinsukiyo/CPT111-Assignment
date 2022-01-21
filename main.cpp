@@ -13,11 +13,14 @@ using namespace std;
 // Headers
 void displayMenu();
 int getPatientNum();
+
 double hospitalStay(int &);
 double surgeryCharges();
 double pharmacyCharges();
 double serviceCharges();
 double eachCost(double, double, double, double);
+
+void lowestAndHighest(double *, int);
 
 
 int main()
@@ -90,84 +93,12 @@ int main()
     cout << "The average hospital stay for each patient is " << avgStay << " days\n" << endl;
     
     // Find the patient who pays the highest bills, and who pays the lowest
-    string lowestPatient = "1", highestPatient = "1";
-    double lowestCost, highestCost;
-    
     if (patientNum == 1)
     {
         cout << "The patient who pays lowest and the highest bills is patient 1." << endl;
         cout << "Lowest / Highest Bills: $" << total[0] << endl;
         
-    } else
-    {
-        // Initialize the lowest and the highest bills
-        lowestCost = highestCost = total[0];
-        
-        for (int i = 1; i < patientNum; i++)
-        {
-            
-            // Lowest Bills
-            if (total[i] <= lowestCost)
-            {
-                // If the costs of a patient is equal to another one, who has the lowest bills
-                if (total[i] == lowestCost)
-                {
-                    lowestPatient += (", " + to_string(i + 1));
-                    
-                } else
-                {
-                    lowestCost = total[i];
-                    lowestPatient = to_string(i + 1);
-                }
-                
-            }
-            
-            // Highest Bills
-            if (total[i] >= highestCost)
-            {
-                // If the costs of a patient is equal to another one, who has the higher bills
-                if (total[i] == highestCost)
-                {
-                    highestPatient += (", " + to_string(i + 1));
-                    
-                    
-                } else
-                {
-                    highestCost = total[i];
-                    highestPatient = to_string(i + 1);
-                }
-                
-            }
-            
-            
-        }
-        
-        // Display the results about who paying the highest bills and the lowest bills
-        cout << "Paying the highest bills: Patient " << highestPatient << " ($" << highestCost << ")\n"
-        << "Paying the lowest bills: Patient " << lowestPatient << " ($" << lowestCost << ")" << endl;
-        
-    }
-    
-
-    
-//    // Calculation
-//    hospital = hospitalStay();
-//    surgery = surgeryCharges();
-//    pharmacy = pharmacyCharges();
-//    service = serviceCharges();
-//
-//    totalCost = hospital + surgery + pharmacy + service;
-//
-//    // Display the charges separately and the total cost
-//    cout << "------------------------------------------------------------------" << endl;
-//    cout << "Bill" << endl;
-//    cout << "Hospital costs: $" << hospital << "\n"
-//         << "Surgery charges: $" << surgery << "\n"
-//         << "Pharmacy charges: $" << pharmacy << "\n"
-//         << "Service charges: $" << service << "\n\n";
-//
-//    cout << "In total, the charge is $" << totalCost << "." << endl;
-//    cout << "Wish you a speedy recovery!" << endl;
+    } else lowestAndHighest(total, patientNum);
     
     return 0;
     
@@ -754,5 +685,57 @@ double eachCost(double hospital, double surgery, double pharmacy, double service
     << "The total cost is $" << total << endl;
     
     return total;
+    
+}
+
+void lowestAndHighest(double *total, int num)
+{
+    // Initialize the lowest and the highest bills
+    double lowest, highest;
+    lowest = highest = total[0];
+    string lowestPatient = "1", highestPatient = "1";
+    
+    for (int i = 1; i < num; i++)
+    {
+        
+        // Lowest Bills
+        if (total[i] <= lowest)
+        {
+            // If the costs of a patient is equal to another one, who has the lowest bills
+            if (total[i] == lowest)
+            {
+                lowestPatient += (", " + to_string(i + 1));
+                
+            } else
+            {
+                lowest = total[i];
+                lowestPatient = to_string(i + 1);
+            }
+            
+        }
+        
+        // Highest Bills
+        if (total[i] >= highest)
+        {
+            // If the costs of a patient is equal to another one, who has the higher bills
+            if (total[i] == highest)
+            {
+                highestPatient += (", " + to_string(i + 1));
+                
+                
+            } else
+            {
+                highest = total[i];
+                highestPatient = to_string(i + 1);
+            }
+            
+        }
+        
+        
+    }
+    
+    // Display the results about who paying the highest bills and the lowest bills
+    cout << "Paying the highest bills: Patient " << highestPatient << " ($" << highest << ")\n"
+    << "Paying the lowest bills: Patient " << lowestPatient << " ($" << lowest << ")" << endl;
     
 }
