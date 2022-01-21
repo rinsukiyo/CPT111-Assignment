@@ -32,9 +32,7 @@ int main()
     const int patientNum = getPatientNum();
     
     // Variable Definition
-    double totalCost = 0, hospital[patientNum], surgery[patientNum],
-    pharmacy[patientNum], service[patientNum],
-    total[patientNum];
+    double totalCost = 0, hospital[patientNum], surgery[patientNum], pharmacy[patientNum], service[patientNum], total[patientNum];
     int eachDays, totalDays = 0;
     
     // Send the values to the array
@@ -42,12 +40,8 @@ int main()
     {
         cout << "Please enter the details of patient " << i + 1 << ". (" << i + 1 << "/" << patientNum << ")" << endl;
         
-        hospital[i] = hospitalStay(eachDays);
-        totalDays += eachDays;
-        
-        surgery[i] = surgeryCharges();
-        pharmacy[i] = pharmacyCharges();
-        service[i] = serviceCharges();
+        hospital[i] = hospitalStay(eachDays); totalDays += eachDays;
+        surgery[i] = surgeryCharges(); pharmacy[i] = pharmacyCharges(); service[i] = serviceCharges();
         
     }
     
@@ -57,30 +51,23 @@ int main()
     {
         cout << "Patient " << i + 1 << endl;
         total[i] = eachCost(hospital[i], surgery[i], pharmacy[i], service[i]);
-        cout << endl;
         
     }
     
     // Display the total costs of all the patients
-    for (int i = 0; i < patientNum; i++)
-    {
-        totalCost += total[i];
-        
-    }
-    
+    for (int i = 0; i < patientNum; i++) totalCost += total[i];
     cout << "The total costs of all the patients is $" << totalCost << ".\n" << endl;
     
-    // Categorized by the different types, display the total costs of all the patients
+    // Categorized by the different types
     double totalHospitalStay = 0, totalSurgery = 0, totalPharmacy = 0, totalService = 0;
     for (int i = 0; i < patientNum; i++)
     {
-        totalHospitalStay += hospital[i];
-        totalSurgery += surgery[i];
-        totalPharmacy += pharmacy[i];
-        totalService += service[i];
+        totalHospitalStay += hospital[i]; totalSurgery += surgery[i];
+        totalPharmacy += pharmacy[i]; totalService += service[i];
         
     }
     
+    // Display the total costs of all the patients
     cout << "The total costs by different types are below: \n"
     << "The total costs of the hospital staying is $" << totalHospitalStay << "\n"
     << "Surgery charges is $" << totalSurgery << "\n"
@@ -88,7 +75,6 @@ int main()
     << "Service charges is $" << totalService << "\n" << endl;
     
     // Calculate and display the average hospital stay for each patient
-    cout << totalDays << " " << patientNum << endl;
     double avgStay = static_cast<double>(totalDays) / static_cast<double>(patientNum);
     cout << "The average hospital stay for each patient is " << avgStay << " days\n" << endl;
     
@@ -682,7 +668,7 @@ double eachCost(double hospital, double surgery, double pharmacy, double service
     << "Service charges: $" << surgery << "\n"
     << "Pharmacy charges: $" << pharmacy << "\n"
     << "Service charges: $" << service << "\n"
-    << "The total cost is $" << total << endl;
+    << "The total cost is $" << total << "\n\n";
     
     return total;
     
