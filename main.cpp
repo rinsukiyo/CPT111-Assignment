@@ -665,7 +665,7 @@ double eachCost(double hospital, double surgery, double pharmacy, double service
     double total = hospital + surgery + pharmacy + service;
     
     cout << "Hospital costs: $" << hospital << "\n"
-    << "Service charges: $" << surgery << "\n"
+    << "Surgery charges: $" << surgery << "\n"
     << "Pharmacy charges: $" << pharmacy << "\n"
     << "Service charges: $" << service << "\n"
     << "The total cost is $" << total << "\n\n";
@@ -703,7 +703,7 @@ void lowestAndHighest(double *total, int num)
         // Highest Bills
         if (total[i] >= highest)
         {
-            // If the costs of a patient is equal to another one, who has the higher bills
+            // If the costs of a patient is equal to another one, who has the highest bills
             if (total[i] == highest)
             {
                 highestPatient += (", " + to_string(i + 1));
