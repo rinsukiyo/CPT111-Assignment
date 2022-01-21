@@ -65,7 +65,7 @@ int main()
         
     }
     
-    cout << "The total costs of all the patients is $" << totalCost << "." << endl;
+    cout << "The total costs of all the patients is $" << totalCost << ".\n" << endl;
     
     // Categorized by the different types, display the total costs of all the patients
     double totalHospitalStay = 0, totalSurgery = 0, totalPharmacy = 0, totalService = 0;
@@ -79,14 +79,14 @@ int main()
     }
     
     cout << "The total costs by different types are below: \n"
-    << "The total costs of the hospital staying is $" << totalHospitalStay << "\n"
-    << "The total surgery charges is $" << totalSurgery << "\n"
-    << "The total pharmacy charges is $" << totalPharmacy << "\n"
-    << "The total service charges is $" << totalService << "." << endl;
+    << "The total costs of the hospital staying is $" << totalHospitalStay << ".\n"
+    << "Surgery charges is $" << totalSurgery << ".\n"
+    << "Pharmacy charges is $" << totalPharmacy << ".\n"
+    << "Service charges is $" << totalService << ".\n" << endl;
     
     // Calculate and display the average hospital stay for each patient
-    double avgStay = totalHospitalStay / patientNum;
-    cout << "The average hospital stay for each patient is " << avgStay << " days." << endl;
+    double avgStay = totalDays / patientNum;
+    cout << "The average hospital stay for each patient is " << avgStay << " days.\n" << endl;
     
     // Find the patient who pays the highest bills, and who pays the lowest
     string lowestPatient = "1", highestPatient = "1";
@@ -101,6 +101,7 @@ int main()
     {
         // Initialize the lowest and the highest bills
         lowestCost = highestCost = total[0];
+        int temp = 0;
         
         for (int i = 1; i < patientNum; i++)
         {
@@ -112,29 +113,36 @@ int main()
                 if (total[i] == lowestCost)
                 {
                     lowestPatient += ", ";
-                    lowestPatient += static_cast<char>(i + 1);
+                    temp = i + 1;
+                    lowestPatient += static_cast<char>(temp);
                     
                 } else
                 {
                     lowestCost = total[i];
-                    lowestPatient = static_cast<char>(i + 1);
+                    temp = i + 1;
+                    lowestPatient = static_cast<char>(temp);
                 }
                 
             }
             
             // Highest Bills
-            if (total[i] <= highestCost)
+            if (total[i] >= highestCost)
             {
                 // If the costs of a patient is equal to another one, who has the higher bills
                 if (total[i] == highestCost)
                 {
                     highestPatient += ", ";
-                    highestPatient += static_cast<char>(i + 1);
+                    temp = i + 1;
+                    highestPatient += static_cast<char>(temp);
+                    
                     
                 } else
                 {
                     highestCost = total[i];
-                    highestPatient = static_cast<char>(i + 1);
+                    temp = i + 1;
+                    highestPatient = static_cast<char>(temp);
+                    cout << "after " << temp << endl; // debug
+                    cout << "after " << highestPatient << endl; // debug
                 }
                 
             }
@@ -747,10 +755,10 @@ double eachCost(double hospital, double surgery, double pharmacy, double service
     // Variable Definition
     double total = hospital + surgery + pharmacy + service;
     
-    cout << "Hospital costs: " << hospital << "\n"
-    << "Service charges: " << surgery << "\n"
-    << "Pharmacy charges: " << pharmacy << "\n"
-    << "Service charges: " << service << "\n"
+    cout << "Hospital costs: $" << hospital << "\n"
+    << "Service charges: $" << surgery << "\n"
+    << "Pharmacy charges: $" << pharmacy << "\n"
+    << "Service charges: $" << service << "\n"
     << "The total cost is $" << total << endl;
     
     return total;
