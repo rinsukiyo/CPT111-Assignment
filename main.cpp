@@ -160,7 +160,7 @@ double hospitalStay(int &days)
     cout << "*****************2.Deluxe Room: $150 per day**********************" << endl;
     cout << "*****************3.Premium Deluxe: $170 per day*******************" << endl;
     cout << "*****************4.Suite: $200 per day****************************" << endl;
-    cout << "*****Please enter the type of room chosen by patient (1-4)*****************" << endl;
+    cout << "*******Please enter the type of room chosen by patient (1-4)******" << endl;
     cin >> temp;
     room = temp;
     
@@ -394,9 +394,9 @@ double pharmacyCharges()
     
     // Medication menu
     cout << "------------------------------------------------------------------" << endl;
-    cout << "**************************medication menu*************************" << endl;
-    cout << "**********************1.surgical bra:$30.70***********************" << endl;
-    cout << "**********************2.abdominal or spinal support: $46.30*******" << endl;
+    cout << "**************************Medication Menu*************************" << endl;
+    cout << "**********************1.Surgical Bra:$30.70***********************" << endl;
+    cout << "**********************2.Abdominal or Spinal support: $46.30*******" << endl;
     cout << "**********************3.Etanercept: $2,225************************" << endl;
     cout << "**********************4.Celecoxib: $225***************************" << endl;
     cout << "**********************5.Glatiramer: $3,903************************" << endl;
